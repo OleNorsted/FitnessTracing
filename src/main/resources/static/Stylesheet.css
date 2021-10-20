@@ -1,0 +1,11 @@
+#header {
+    display: flex;
+}
+.header{
+    width: 25%;
+    text-align: center;
+}
+
+.tyngde {
+    display: none;
+}

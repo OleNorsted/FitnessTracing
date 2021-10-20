@@ -3,13 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Oversikt</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="js/index.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="Stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
 <body>
 <div id="header">
-    <div id="Headder" onclick="location.href='index.html'"><h3>Trenin Tracer</h3></div>
-    <div id="oversikt"><h3>Oversikt</h3></div>
-    <div id="sammenlign"><h3>Sammenlign</h3></div>
-    <div id="LeggTil"><h3>LeggTil</h3></div>
+    <div id="Headder" class="header" onclick="location.href='index.html'"><h3>Trenin Tracer</h3></div>
+    <div id="oversikt" class="header"><h3>Oversikt</h3></div>
+    <div id="sammenlign" class="header"><h3>Sammenlign</h3></div>
+    <div id="LeggTil" class="header"><h3>LeggTil</h3></div>
 </div>
+<div id="main">
+    <div class="form-group">
+        <label for="Oppvarming">Oppvarming</label>
+        <input type="text" class="form-control" id="Oppvarming">
+        <small id="oppvarmingFeil" class="form-text text-muted" ></small>
+    </div>
+    <div class="form-group">
+        <label for="typeOvelse">Type øvelse</label>
+        <select id="typeOvelse">
+        <option value="1">Ok</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="antallSet">Antall Sett</label>
+       <select id="antallSet" onchange="SynligTyngde()"></select>
+        <small id="antallSetFeil" class="form-text text-muted" ></small>
+    </div>
+    <div class="form-group">
+        <label for="antallRep">Antall Repetisjoner</label>
+        <select id="antallRep"></select>
+        <small id="antallRepFeil" class="form-text text-muted" ></small>
+    </div>
+    <div id="tyngdeSet1" class="tyngde">
+        <label for="tyngdeS1">Tyngde på sett 1</label>
+        <select id="tyngdeS1"></select>
+        <small id="tyngdeS1Feil" class="form-text text-muted" ></small>
+    </div>
+    <div id="tyngdeSet2" class="tyngde">
+        <label for="tyngdeS2">Tyngde på sett 2</label>
+        <select id="tyngdeS2"></select>
+        <small id="tyngdeS2Feil" class="form-text text-muted" ></small>
+    </div>
+    <div id="tyngdeSet3" class="tyngde">
+        <label for="tyngdeS3">Tyngde på sett 3</label>
+        <select id="tyngdeS3"></select>
+        <small id="tyngdeS3Feil" class="form-text text-muted" ></small>
+    </div>
+    <div id="tyngdeSet4" class="tyngde">
+        <label for="tyngdeS4">Tyngde på sett 4</label>
+        <select id="tyngdeS4"></select>
+        <small id="tyngdeS4Feil" class="form-text text-muted" ></small>
+    </div>
+    <div id="tyngdeSet5" class="tyngde">
+        <label for="tyngdeS5">Tyngde på sett 5</label>
+        <select id="tyngdeS5"></select>
+        <small id="tyngdeS5Feil" class="form-text text-muted" ></small>
+    </div>
+<button id="testButton" onclick="reg()">test button</button>
+
+</div>
+<div id="Result"></div>
 </body>
 </html>
