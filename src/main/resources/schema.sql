@@ -1,7 +1,14 @@
-CREATE TABLE trening
+CREATE TABLE trainingSession
 (
-    id INTEGER AUTO_INCREMENT NOT NULL ,
-    toId INTEGER ,
+
+    date DATE NOT NULL,
+    oppvarming VARCHAR (255) ,
+    PRIMARY KEY (date)
+);
+
+CREATE TABLE exercise
+(
+    eId INTEGER AUTO_INCREMENT NOT NULL ,
     typeOvelse INTEGER ,
     antallSet INTEGER ,
     antallRep INTEGER,
@@ -10,13 +17,9 @@ CREATE TABLE trening
     tyngdeS3 INTEGER ,
     tyngdeS4 INTEGER ,
     tyngdeS5 INTEGER ,
-    PRIMARY KEY (id)
+    /*trainSesh INTEGER NOT NULL,*/
+    PRIMARY KEY (eId)
+    /*FOREIGN KEY (trainSesh_id) REFERENCES trainingSession(trainSesh_id)*/
 );
 
-CREATE TABLE treningsOkter
-(
-    toId INTEGER AUTO_INCREMENT NOT NULL,
-    oppvarming VARCHAR (255) ,
-    date DATE ,
-    PRIMARY KEY (toId)
-);
+

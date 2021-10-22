@@ -55,7 +55,6 @@ for (let i = 1; i < 5; i++) {
 function reg (){
 
     const trening = {
-        oppvarming : $("#oppvarming").val(),
         typeOvelse : $("#typeOvelse").val(),
         antallSet : $("#antallSet").val(),
         antallRep : $("#antallRep").val(),
@@ -67,10 +66,9 @@ function reg (){
     };
     const feil = validerEnInput();
     if(!feil){
-       $.post("/saveOne", trening, function (){
-           console.log("hei");
+       $.post("/saveNewExercise", trening, function (){
+           showAllExercise();
        });
-        $("#Oppvarming").val("");
         $('#typeOvelse').get(0).selectedIndex = 0;
         $('#antallSet').get(0).selectedIndex = 0;
         $('#antallRep').get(0).selectedIndex = 0;
@@ -83,26 +81,81 @@ function reg (){
     }
 }
 
+function regSession(){
+
+    const exercise = {
+        date : $("#trainSession").val(),
+        oppvarming: $("#oppvarming").val(),
+    }
+
+    const feil = validateInputsSetion()
+    if (!feil){
+        $.post("/saveNewSession", exercise, function (){
+
+        })
+    }
+}
+
+function showAllExercise(){
+   // $.get( "/getExercise", function( exercise ) {
+        $.get("/getSession", function (session){
+            formatDeta( session);
+        })
+   // });
+
+}
+
+
+function formatDeta ( session){
+    let ut = "<table id='output'><tr><th>Treningsøkt Dato</th><th>Type Øvelse</th><th>Antall Set</th><th>Antall Rep per set</th><th>Tyngde</th></tr>";
+    for (let s of session){
+        console.log(s.date);
+
+        ut += "<tr><th>"+exercise.antallSet+"</th>";
+    }
+
+
+       ut += "</table>"
+    $("#Result").html(ut);
+}
+
 
 
 function validerEnInput(){
-    $("#typeOvelseFeil").val("0");
-    $("#antallSetFeil").val("0");
-    $("#antallRepFeil").val("0");
+    $("#typeOvelseFeil").html("");
+    $("#antallSetFeil").html("");
+    $("#antallRepFeil").html("");
     let feil = false;
-    if($("#typeOvelse").val()=== 0){
+    if($("#typeOvelse").val()== 0){
         $("#typeOvelseFeil").html("Må velge noe inn i type ovelse");
         feil=true;
     }
-    if($("#antallSet").val()=== 0){
+    if($("#antallSet").val()== 0){
         $("#antallSetFeil").html("Må velge noe inn i antall Set");
         feil=true;
     }
-    if($("#antallRep").val()=== 0){
+    if($("#antallRep").val()== 0){
         $("#antallRepFeil").html("Må velge noe inn i antall rep");
         feil=true;
     }
-    return feil
+    return feil;
+}
+
+function validateInputsSetion(){
+    $("#trainSessionFeil").html("");
+    $("#oppvarmingFeil").html("");
+
+    let feil = false;
+    if ($("#trainSession").val()==0){
+        $("#trainSessionFeil").html("må velge en dato");
+        feil = true;
+    }
+    console.log($("#oppvarming").val())
+    if ($("#oppvarming").val() == ""){
+        $("#oppvarmingFeil").html("må velge en oppvarming");
+        feil = true;
+    }
+    return feil;
 }
 
 

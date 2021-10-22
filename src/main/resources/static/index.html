@@ -17,17 +17,25 @@
     <div id="sammenlign" class="header"><h3>Sammenlign</h3></div>
     <div id="LeggTil" class="header"><h3>LeggTil</h3></div>
 </div>
+<div>
+    <label for="trainSession"></label>
+    <input type="date" id="trainSession">
+    <small id="trainSessionFeil" class="form-text text-muted"></small>
+</div>
 <div id="main">
     <div class="form-group">
-        <label for="Oppvarming">Oppvarming</label>
-        <input type="text" class="form-control" id="Oppvarming">
+        <label for="oppvarming">Oppvarming</label>
+        <input type="text" class="form-control" id="oppvarming">
+        <button onclick="regSession()">New exercise</button>
         <small id="oppvarmingFeil" class="form-text text-muted" ></small>
     </div>
     <div class="form-group">
         <label for="typeOvelse">Type øvelse</label>
         <select id="typeOvelse">
-        <option value="1">Ok</option>
+        <option value="0">Nei</option>
+        <option value="1">Ja</option>
         </select>
+        <small id="typeOvelseFeil" class="form-text text-muted" ></small>
     </div>
     <div class="form-group">
         <label for="antallSet">Antall Sett</label>

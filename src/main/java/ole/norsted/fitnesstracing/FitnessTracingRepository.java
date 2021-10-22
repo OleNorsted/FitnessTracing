@@ -14,20 +14,33 @@ public class FitnessTracingRepository {
     @Autowired
     public JdbcTemplate db;
 
-    public void saveExercise(FitnessTracing trening){
-        String sql = "INSERT INTO trening (typeOvelse,antallSet,antallRep,tyngdeS1,tyngdeS2,tyngdeS3,tyngdeS4,tyngdeS5) VALUES(?,?,?,?,?,?,?,?)";
-        db.update(sql,trening.getTypeOvelse(),trening.getAntallSet(),trening.getAntallRep(),trening.getTyngdeS1(),
-                trening.getTyngdeS2(), trening.getTyngdeS3(), trening.getTyngdeS4(), trening.getTyngdeS5());
+    public void saveNewExercise(FitnessTracing exercise){
+        String sql = "INSERT INTO exercise (typeOvelse,antallSet,antallRep,tyngdeS1,tyngdeS2,tyngdeS3,tyngdeS4,tyngdeS5) VALUES(?,?,?,?,?,?,?,?)";
+        db.update(sql,exercise.getTypeOvelse(),exercise.getAntallSet(),exercise.getAntallRep(),exercise.getTyngdeS1(),
+                exercise.getTyngdeS2(), exercise.getTyngdeS3(), exercise.getTyngdeS4(), exercise.getTyngdeS5());
     }
 
-    public List<FitnessTracing> getAll() {
-        String sql = "SELECT * FROM TRENING";
+    public void saveNewSession(TrainingSession TS){
+        String sql = "INSERT INTO trainingSession (date ,oppvarming) VALUES (?,?)";
+        db.update(sql, TS.getDate(), TS.getOppvarming());
+    }
+
+    public List<TrainingSession> getSession(){
+        String sql = "SELECT * FROM trainingSession";
+        List<TrainingSession> allSessions =  db.query(sql,new BeanPropertyRowMapper(TrainingSession.class));
+        return allSessions;
+    }
+
+    public List<FitnessTracing> getExercise() {
+        String sql = "SELECT * FROM exercise";
         List<FitnessTracing> allExercises = db.query(sql,new BeanPropertyRowMapper(FitnessTracing.class));
         return allExercises;
     }
 
+
+
     public void SlettEn(FitnessTracing id){
-        String sql = "DELETE FROM TRENING WHERE id = ?";
+        String sql = "DELETE FROM exercise WHERE id = ?";
         db.update(sql,id);
     }
 

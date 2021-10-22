@@ -13,17 +13,21 @@ public class FitnessTracingController {
     @Autowired
     FitnessTracingRepository rep;
 
-    @PostMapping("/saveOne")
-    public void saveExercise(FitnessTracing innExercise){
-        rep.saveExercise(innExercise);
+    @PostMapping("/saveNewExercise")
+    public void saveNewExercise(FitnessTracing innExercise){
+        rep.saveNewExercise(innExercise);
     }
-   /* @PostMapping("/saveNew")
-    public void SaveNewExercise(FitnessTracing innExercise){
-        /*rep.saveNewExercise(innExercise);
-    }*/
-    @GetMapping("/getAll")
-    public List<FitnessTracing> getAll(){
-        return rep.getAll();
+    @PostMapping("/saveNewSession")
+    public void SaveNewSession(TrainingSession innSession){
+        rep.saveNewSession(innSession);
+    }
+    @GetMapping("/getExercise")
+    public List<FitnessTracing> getExercise(){
+        return rep.getExercise();
+    }
+    @GetMapping("/getSession")
+    public List<TrainingSession> getSession(){
+        return rep.getSession();
     }
 
 }
