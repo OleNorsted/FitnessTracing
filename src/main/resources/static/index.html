@@ -12,34 +12,48 @@
 </head>
 <body>
 <div id="header">
-    <div id="Headder" class="header" onclick="location.href='index.html'"><h3>Trenin Tracer</h3></div>
+    <div id="Headder" class="header" onclick="visMain()"><h3>Trenin Tracer</h3></div>
     <div id="oversikt" class="header"><h3>Oversikt</h3></div>
     <div id="sammenlign" class="header"><h3>Sammenlign</h3></div>
-    <div id="LeggTil" class="header"><h3>LeggTil</h3></div>
-</div>
-<div>
-    <label for="trainSession"></label>
-    <input type="date" id="trainSession">
-    <small id="trainSessionFeil" class="form-text text-muted"></small>
+    <div id="LeggTil" class="header" onclick="visNewTrainTask()"><h3>Ny Type Øvelse?</h3></div>
 </div>
 <div id="main">
     <div class="form-group">
-        <label for="oppvarming">Oppvarming</label>
-        <input type="text" class="form-control" id="oppvarming">
-        <button onclick="regSession()">New exercise</button>
-        <small id="oppvarmingFeil" class="form-text text-muted" ></small>
+        <label for="inpSesName">Session Name</label>
+        <input type="text" class="form-control inputs"  id="inpSesName">
+        <small id="inpSesNameFeil" class="form-text text-muted" ></small>
     </div>
     <div class="form-group">
-        <label for="typeOvelse">Type øvelse</label>
-        <select id="typeOvelse">
-        <option value="0">Nei</option>
-        <option value="1">Ja</option>
+        <label for="inpDate">Dato : </label>
+        <input type="date" id="inpDate">
+        <button onclick="setDate()" id="btnDate">Set dato i dag</button>
+        <small id="inpDateFeil" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group">
+        <label for="inpOppvarming">Oppvarming</label>
+        <input type="text" class="form-control inputs" id="inpOppvarming">
+        <button onclick="regSession()">New exercise</button>
+        <small id="inpOppvarmingFeil" class="form-text text-muted" ></small>
+    </div>
+    <div class="form-group">
+        <label for="slcSession">Velg session å registrere trening til</label>
+        <select id="slcSession"></select>
+        <small id="slcSessionFeil" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group">
+        <label for="slcTypeOvelse">Type øvelse</label>
+        <select id="slcTypeOvelse">
+            <option value="0">Velg en øvelse</option>
+            <option value="Row">Row</option>
+            <option value="Tricep Extention">Tricep Extention</option>
+            <option value="Pulldown">Pulldown</option>
+            <option value="Chest Press">Chest Press</option>
         </select>
-        <small id="typeOvelseFeil" class="form-text text-muted" ></small>
+        <small id="slcTypeOvelseFeil" class="form-text text-muted" ></small>
     </div>
     <div class="form-group">
         <label for="antallSet">Antall Sett</label>
-       <select id="antallSet" onchange="SynligTyngde()"></select>
+       <select id="antallSet" onchange="synligTyngde()"></select>
         <small id="antallSetFeil" class="form-text text-muted" ></small>
     </div>
     <div class="form-group">
@@ -72,9 +86,17 @@
         <select id="tyngdeS5"></select>
         <small id="tyngdeS5Feil" class="form-text text-muted" ></small>
     </div>
-<button id="testButton" onclick="reg()">test button</button>
-
+    <button id="btnRegTrening" onclick="reg()">Registrer Trening</button>
+    <div id="Result"></div>
 </div>
-<div id="Result"></div>
+
+<div id="newTrainingTask">
+        <div class="form-text">
+            <label for="inpNyOvelse">Hva er navnet på den nye øvelsen?</label>
+            <input type="text" class="form-control"  id="inpNyOvelse">
+            <button onclick="leggTilNyOvelse()">New exercise</button>
+            <small id="inpNyOvelseFeil" class="form-text text-muted"></small>
+    </div>
+</div>
 </body>
 </html>

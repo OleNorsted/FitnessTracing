@@ -15,14 +15,14 @@ public class FitnessTracingRepository {
     public JdbcTemplate db;
 
     public void saveNewExercise(FitnessTracing exercise){
-        String sql = "INSERT INTO exercise (typeOvelse,antallSet,antallRep,tyngdeS1,tyngdeS2,tyngdeS3,tyngdeS4,tyngdeS5) VALUES(?,?,?,?,?,?,?,?)";
-        db.update(sql,exercise.getTypeOvelse(),exercise.getAntallSet(),exercise.getAntallRep(),exercise.getTyngdeS1(),
+        String sql = "INSERT INTO exercise (sId, typeOvelse,antallSet,antallRep,tyngdeS1,tyngdeS2,tyngdeS3,tyngdeS4,tyngdeS5) VALUES(?,?,?,?,?,?,?,?,?)";
+        db.update(sql,exercise.getsId(), exercise.getTypeOvelse(),exercise.getAntallSet(),exercise.getAntallRep(),exercise.getTyngdeS1(),
                 exercise.getTyngdeS2(), exercise.getTyngdeS3(), exercise.getTyngdeS4(), exercise.getTyngdeS5());
     }
 
     public void saveNewSession(TrainingSession TS){
-        String sql = "INSERT INTO trainingSession (date ,oppvarming) VALUES (?,?)";
-        db.update(sql, TS.getDate(), TS.getOppvarming());
+        String sql = "INSERT INTO trainingSession (sesName , date ,oppvarming) VALUES (?,?,?)";
+        db.update(sql, TS.getSesName(), TS.getDate(), TS.getOppvarming());
     }
 
     public List<TrainingSession> getSession(){

@@ -17,10 +17,12 @@ public class FitnessTracingController {
     public void saveNewExercise(FitnessTracing innExercise){
         rep.saveNewExercise(innExercise);
     }
+
     @PostMapping("/saveNewSession")
     public void SaveNewSession(TrainingSession innSession){
         rep.saveNewSession(innSession);
     }
+
     @GetMapping("/getExercise")
     public List<FitnessTracing> getExercise(){
         return rep.getExercise();

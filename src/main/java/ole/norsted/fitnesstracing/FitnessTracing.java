@@ -1,9 +1,7 @@
 package ole.norsted.fitnesstracing;
 
-import java.util.Date;
-
 public class FitnessTracing {
-    //private int trainSesh_id;
+    private int sId;
     private String typeOvelse;
     private int antallSet;
     private int antallRep;
@@ -13,9 +11,8 @@ public class FitnessTracing {
     private int tyngdeS4;
     private int tyngdeS5;   //beregner at bruker ikke kjører flere en 5 sett på en øvelse
 
-    public FitnessTracing(/*int trainSesh_id,*/ String typeOvelse, int antallSet, int antallRep, int tyngdeS1, int tyngdeS2, int tyngdeS3, int tyngdeS4, int tyngdeS5) {
-        //dato = new Date(System.currentTimeMillis());
-       // this.trainSesh_id = trainSesh_id;
+    public FitnessTracing(int sId, String typeOvelse, int antallSet, int antallRep, int tyngdeS1 , int tyngdeS2, int tyngdeS3, int tyngdeS4, int tyngdeS5) {
+        this.sId = sId;
         this.typeOvelse = typeOvelse;
         this.antallSet = antallSet;
         this.antallRep = antallRep;
@@ -29,9 +26,9 @@ public class FitnessTracing {
     public FitnessTracing(){
     }
 
-   // public int getTrainSesh_id() {return trainSesh_id;}
+   public int getsId() {return sId;}
 
-   // public void setTrainSesh_id(int toId) {this.trainSesh_id = trainSesh_id;}
+   public void setsId(int sId) {this.sId = sId;}
 
     public String getTypeOvelse() {
         return typeOvelse;

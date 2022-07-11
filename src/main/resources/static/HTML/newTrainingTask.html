@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ny Type Øvelse</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="../js/index.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../Stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div id="header">
+    <div id="Headder" class="header" onclick="location.href='../index.html'"><h3>Trenin Tracer</h3></div>
+    <div id="oversikt" class="header"><h3>Oversikt</h3></div>
+    <div id="sammenlign" class="header"><h3>Sammenlign</h3></div>
+    <div id="LeggTil" class="header" onclick="location.href='newTrainingTask.html'">><h3>Ny Type Øvelse?</h3></div>
+</div>
+<div id="main">
+    <div class="form-text">
+        <label for="inpNyOvelse">Hva er navnet på den nye øvelsen?</label>
+        <input type="text" class="form-control"  id="inpNyOvelse">
+        <button onclick="leggTilNyOvelse()">New exercise</button>
+        <small id="inpNyOvelseFeil" class="form-text text-muted"></small>
+    </div>
+</div>
+
+</body>
+</html>
