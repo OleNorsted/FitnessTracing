@@ -1,21 +1,21 @@
-
-$(function(){
+function loadValuesSet(){
     let select = '';
     for (let i=0;i<=5;i++) {
         select += '<option value=' + i + '>' + i + '</option>';
     }
     $('#antallSet').html(select);
-});
+}
 
-$(function(){
+function loadValuesRep(){
     let select = '';
     for (let i=1;i<=30;i++) {
         select += '<option value=' + i + '>' + i + '</option>';
     }
     $('#antallRep').html(select);
-});
+}
 
-$(function(){
+
+function loadValuesTyngde(){
     let select = '';
     for (let i=1;i<=100;i++) {
         select += '<option value=' + i + '>' + i + ' Kg</option>';
@@ -25,8 +25,7 @@ $(function(){
     $('#tyngdeS3').html(select);
     $('#tyngdeS4').html(select);
     $('#tyngdeS5').html(select);
-});
-
+}
 
 
 function synligTyngde() {
@@ -39,9 +38,10 @@ function synligTyngde() {
     }
 }
 
+
 function visSessions(){
     $.get("/getSession", function (session){
-        options = "";
+        let options = "";
         for (let s of session){
             options += "<option value= "+s.sId+">"+s.sesName+" "+s.date+"</option>";
         }
@@ -50,10 +50,6 @@ function visSessions(){
 
     })
 }
-
-$(function (){
-    visSessions()
-});
 
 
 function reg (){
@@ -86,14 +82,13 @@ function reg (){
     }
 }
 
-function regSession(){
 
+function regSession(){
     const session = {
         sesName : $("#inpSesName").val(),
         date : $("#inpDate").val(),
         oppvarming: $("#inpOppvarming").val(),
     }
-
     const feil = validerEnSession()
     if (!feil){
         $.post("/saveNewSession", session, function (){
@@ -102,13 +97,13 @@ function regSession(){
     }
 }
 
+
 function showAllExercise(){
    $.get( "/getExercise", function( exercise ) {
         $.get("/getSession", function (session){
             formatDeta( exercise , session);
         })
    });
-
 }
 
 
@@ -126,10 +121,9 @@ function formatDeta ( exercise,session){
                 }}
         }
     }
-       ut += "</table>"
+    ut += "</table>"
     $("#Result").html(ut);
 }
-
 
 
 function validerEnTrening(){
@@ -153,9 +147,9 @@ function validerEnTrening(){
         $("#antallRepFeil").html("Må velge noe inn i antall rep");
         feil=true;
     }
-
     return feil;
 }
+
 
 function validerEnSession(){
     $("#inpSesNameFeil").html("");
@@ -175,22 +169,20 @@ function validerEnSession(){
         $("#inpOppvarmingFeil").html("må velge en oppvarming");
         feil = true;
     }
-
     return feil;
 }
+
 
 function visNewTrainTask(){
     document.getElementById("newTrainingTask").style.visibility = "visible";
     document.getElementById("main").style.display = "none";
 }
+
 function visMain(){
     document.getElementById("newTrainingTask").style.visibility = "hidden";
     document.getElementById("main").style.display = "block";
 }
 
-$(function (){
-    visMain();
-});
 
 function leggTilNyOvelse() {
     let inp = $("#inpNyOvelse");
@@ -212,6 +204,17 @@ function leggTilNyOvelse() {
     }
 }
 
+
+$(function (){
+    visMain();
+    visSessions();
+    showAllExercise();
+    loadValuesSet();
+    loadValuesRep();
+    loadValuesTyngde();
+});
+
+
 function setDate(){
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -220,8 +223,9 @@ function setDate(){
 
     today = yyyy + '-' + mm + '-' + dd;
     $("#inpDate").val(today)
-    $("#inpDate")
 }
+
+
 /*function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 await sleep(1000) //vent et sekund

@@ -27,9 +27,9 @@ public class FitnessTracingController {
     public List<FitnessTracing> getExercise(){
         return rep.getExercise();
     }
+
     @GetMapping("/getSession")
     public List<TrainingSession> getSession(){
-        return rep.getSession();
-    }
+        return rep.getSession();}
 
 }
