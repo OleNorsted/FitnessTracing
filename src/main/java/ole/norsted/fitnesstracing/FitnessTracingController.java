@@ -18,18 +18,28 @@ public class FitnessTracingController {
         rep.saveNewExercise(innExercise);
     }
 
-    @PostMapping("/saveNewSession")
-    public void SaveNewSession(TrainingSession innSession){
-        rep.saveNewSession(innSession);
-    }
-
     @GetMapping("/getExercise")
     public List<FitnessTracing> getExercise(){
         return rep.getExercise();
     }
 
+    @PostMapping("/saveNewSession")
+    public void SaveNewSession(TrainingSession innSession){
+        rep.saveNewSession(innSession);
+    }
+
     @GetMapping("/getSession")
     public List<TrainingSession> getSession(){
         return rep.getSession();}
+
+    @PostMapping("/saveNewTypeOfExercise")
+    public void saveNewTypeOfExercise(TypeOfExercise innType){rep.saveNewTypeOfExercise(innType);}
+
+    @GetMapping("/getTypeOfExercise")
+    public  List<TypeOfExercise> getTypeOfExercise(){
+        return  rep.getTypeOfExercise();}
+
+    @PostMapping("/deleteAExercise")
+    public void deleteAExercise(int exId){rep.deleteAExercise(exId);}
 
 }

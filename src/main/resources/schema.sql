@@ -23,4 +23,9 @@ CREATE TABLE exercise
     /*FOREIGN KEY (trainSesh_id) REFERENCES trainingSession(trainSesh_id)*/
 );
 
+CREATE TABLE typeOfExercise
+(
+    type VARCHAR (255)
+)
+
 

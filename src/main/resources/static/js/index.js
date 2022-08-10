@@ -135,7 +135,7 @@ function validerEnTrening(){
     if ($("#slcSession").val()==0){
         $("#slcSessionFeil").html("Må velde en session å linke trening til");
     }
-    if($("#slcTypeOvelse").val()== 0){
+    if($("#slcTypeOvelse").val()== "Type Of Exercise"){
         $("#slcTypeOvelseFeil").html("Må velge noe inn i type ovelse");
         feil=true;
     }
@@ -190,29 +190,35 @@ function leggTilNyOvelse() {
     let inpText = $("#inpNyOvelse").val();
     if (inpText != null) {
         let values = document.querySelector('#slcTypeOvelse').options;
-        let like = false;
+        let alike = false;
         for (let i = 0; i < values.length; i++) {
             if (values[i].value === inpText) {
-                like = true;
+                alike = true;
             }
         }
-        if (!like) {
-            let newOption = new Option(inpText,inpText);
+        if (!alike) {
+            const newTypeOfExercise = {type: inpText}
+            $.post("/saveNewTypeOfExercise", newTypeOfExercise, function () {
+                showTypesOfExercises();
+                $("#inpNyOvelseFeil").html("Ny øvelse lagret");
+            });
+            /*let newOption = new Option(inpText,inpText);
             document.getElementById("slcTypeOvelse").add(newOption,undefined)
-            $("#inpNyOvelseFeil").html("Ny øvelse lagret");
+            $("#inpNyOvelseFeil").html("Ny øvelse lagret");*/
         }
     }
 }
 
-
-$(function (){
-    visMain();
-    visSessions();
-    showAllExercise();
-    loadValuesSet();
-    loadValuesRep();
-    loadValuesTyngde();
-});
+function showTypesOfExercises(){
+    $.get("/getTypeOfExercise", function (typesOfExercises){
+        $("#slcTypeOvelse").html("")
+        let values = document.querySelector('#slcTypeOvelse').options;
+        for (let toe of typesOfExercises){
+            let newOption = new Option(toe.type,toe.type);
+            document.getElementById("slcTypeOvelse").add(newOption,undefined)
+        }
+    })
+}
 
 
 function setDate(){
@@ -226,7 +232,12 @@ function setDate(){
 }
 
 
-/*function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-await sleep(1000) //vent et sekund
-*/
+$(function (){
+    visMain();
+    visSessions();
+    showAllExercise();
+    loadValuesSet();
+    loadValuesRep();
+    loadValuesTyngde();
+    showTypesOfExercises();
+});

@@ -1,6 +1,7 @@
 package ole.norsted.fitnesstracing;
 
 public class FitnessTracing {
+    private int eId;
     private int sId;
     private String typeOvelse;
     private int antallSet;
@@ -26,7 +27,11 @@ public class FitnessTracing {
     public FitnessTracing(){
     }
 
-   public int getsId() {return sId;}
+    public int geteId() {return eId;}
+
+    public void seteId(int eId) {this.eId = eId;}
+
+    public int getsId() {return sId;}
 
    public void setsId(int sId) {this.sId = sId;}
 
