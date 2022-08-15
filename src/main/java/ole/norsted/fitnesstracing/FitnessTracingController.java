@@ -42,4 +42,7 @@ public class FitnessTracingController {
     @PostMapping("/deleteAExercise")
     public void deleteAExercise(int exId){rep.deleteAExercise(exId);}
 
+    @PostMapping("/deleteASession")
+    public void deleteASession(int sId){rep.deleteASession(sId);}
+
 }

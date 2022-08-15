@@ -52,5 +52,11 @@ public class FitnessTracingRepository {
         String sql = "DELETE FROM exercise WHERE eId = ?";
         db.update(sql,id);
     }
+    public void deleteASession(int id){
+        String sql1 = "DELETE FROM exercise WHERE sId = ?";
+        db.update(sql1,id);
+        String sql2 = "DELETE FROM session WHERE sId = ?";
+        db.update(sql2, id);
+    }
 
 }

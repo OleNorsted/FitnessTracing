@@ -231,6 +231,17 @@ function setDate(){
     $("#inpDate").val(today)
 }
 
+function comapreFillInpust(){
+    if ($("slcTypeCompare").val() != 0){
+        $.get( "/getExercise", function( exercise ) {
+            $.get("/getSession", function (session){
+                if ($("slcTypeCompare").val() == "exercises"){
+
+                }
+        });
+    });
+}
+
 
 $(function (){
     visMain();
