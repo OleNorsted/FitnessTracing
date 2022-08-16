@@ -1,3 +1,5 @@
+
+
 function loadValuesSet(){
     let select = '';
     for (let i=0;i<=5;i++) {
@@ -99,30 +101,12 @@ function regSession(){
 
 
 function showAllExercise(){
+    let output = $("#Result")
    $.get( "/getExercise", function( exercise ) {
         $.get("/getSession", function (session){
-            formatDeta( exercise , session);
+            formatDeta( exercise , session, output);
         })
    });
-}
-
-
-function formatDeta ( exercise,session){
-    $("#Result").html("");
-    let ut = "";
-    for (let s of session) {
-        ut += "<tr><th>" + s.sesName + "</th><th>"+s.date+"</th><td>"+s.oppvarming+"</td></tr>"
-        for (let e of exercise) {
-            if (s.sId === e.sId){
-                ut += "<tr><td>"+e.antallRep+" x "+e.antallSet+" med "+e.typeOvelse+"</td>";
-                for (let i = 1;i < e.antallSet+1;i++){
-                    let tyngde = "tyngdeS"+i
-                    ut += "<td> Sett "+i+": "+e[tyngde]+" Kg </td>";
-                }}
-        }
-    }
-    ut += "</table>"
-    $("#Result").html(ut);
 }
 
 
@@ -212,7 +196,6 @@ function leggTilNyOvelse() {
 function showTypesOfExercises(){
     $.get("/getTypeOfExercise", function (typesOfExercises){
         $("#slcTypeOvelse").html("")
-        let values = document.querySelector('#slcTypeOvelse').options;
         for (let toe of typesOfExercises){
             let newOption = new Option(toe.type,toe.type);
             document.getElementById("slcTypeOvelse").add(newOption,undefined)
@@ -231,16 +214,32 @@ function setDate(){
     $("#inpDate").val(today)
 }
 
-function comapreFillInpust(){
+/*function comapreFillInpust(){
     if ($("slcTypeCompare").val() != 0){
-        $.get( "/getExercise", function( exercise ) {
-            $.get("/getSession", function (session){
-                if ($("slcTypeCompare").val() == "exercises"){
-
+        if ($("slcTypeCompare").val() == "exercises") {
+            let options = "";
+            for (let s of session) {
+                options += "<option value= " + s.sId + ">" + s.sesName + " " + s.date + "</option>";
+            }
+            $("#slcTypeCompareInput1").html(options)
+            $("#slcTypeCompareInput2").html(options)
+        }
+        else if ($("slcTypeCompare").val() == "exercise"){
+            $.get("/getTypeOfExercise", function (typesOfExercises) {
+                $("#slcTypeCompareInput1").html("")
+                $("#slcTypeCompareInput2").html("")
+                let values1 = document.querySelector('#slcTypeCompareInput1').options;
+                let values2 = document.querySelector('#slcTypeCompareInput2').options;
+                for (let toe of typesOfExercises) {
+                    let newOption = new Option(toe.type, toe.type);
+                    document.getElementById("slcTypeCompareInput1").add(newOption, undefined)
+                    document.getElementById("slcTypeCompareInput2").add(newOption, undefined)
                 }
-        });
-    });
-}
+            });
+        }
+    }
+}*/
+
 
 
 $(function (){

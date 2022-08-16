@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.websocket.Session;
 import java.util.List;
 
 @Repository
@@ -14,25 +15,25 @@ public class FitnessTracingRepository {
     @Autowired
     public JdbcTemplate db;
 
-    public void saveNewExercise(FitnessTracing E){
+    public void saveNewExercise(Exercise E){
         String sql = "INSERT INTO exercise (sId, typeOvelse,antallSet,antallRep,tyngdeS1,tyngdeS2,tyngdeS3,tyngdeS4,tyngdeS5) VALUES(?,?,?,?,?,?,?,?,?)";
         db.update(sql,E.getsId(), E.getTypeOvelse(),E.getAntallSet(),E.getAntallRep(),E.getTyngdeS1(),
                 E.getTyngdeS2(), E.getTyngdeS3(), E.getTyngdeS4(), E.getTyngdeS5());
     }
 
-    public List<FitnessTracing> getExercise() {
+    public List<Exercise> getExercise() {
         String sql = "SELECT * FROM exercise";
-        List<FitnessTracing> allExercises = db.query(sql,new BeanPropertyRowMapper(FitnessTracing.class));
+        List<Exercise> allExercises = db.query(sql,new BeanPropertyRowMapper(Exercise.class));
         return allExercises;
     }
 
     public void saveNewSession(TrainingSession TS){
-        String sql = "INSERT INTO trainingSession (sesName , date ,oppvarming) VALUES (?,?,?)";
+        String sql = "INSERT INTO session (sesName , date ,oppvarming) VALUES (?,?,?)";
         db.update(sql, TS.getSesName(), TS.getDate(), TS.getOppvarming());
     }
 
     public List<TrainingSession> getSession(){
-        String sql = "SELECT * FROM trainingSession";
+        String sql = "SELECT * FROM session";
         List<TrainingSession> allSessions =  db.query(sql,new BeanPropertyRowMapper(TrainingSession.class));
         return allSessions;
     }
@@ -57,6 +58,16 @@ public class FitnessTracingRepository {
         db.update(sql1,id);
         String sql2 = "DELETE FROM session WHERE sId = ?";
         db.update(sql2, id);
+    }
+
+    public List<TrainingSession> getSessionQuery(String sql){
+        List <TrainingSession> query = db.query(sql, new BeanPropertyRowMapper(TrainingSession.class));
+        return query;
+    }
+
+    public List<Exercise> getExerciseQuery(String sql){
+        List <Exercise> query = db.query(sql, new BeanPropertyRowMapper(Exercise.class));
+        return query;
     }
 
 }

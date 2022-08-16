@@ -1,4 +1,4 @@
-CREATE TABLE trainingSession
+CREATE TABLE session
 (
     sId INTEGER AUTO_INCREMENT NOT NULL ,
     sesName VARCHAR (255) ,

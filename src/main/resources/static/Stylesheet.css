@@ -1,9 +1,10 @@
 #header {
     display: flex;
+    background-color: darkcyan;
 }
 .header{
     width: 25%;
-    text-align: center;
+    margin: 10px;
 }
 
 #main {
