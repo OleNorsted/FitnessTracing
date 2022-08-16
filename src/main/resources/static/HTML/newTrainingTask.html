@@ -11,16 +11,18 @@
 <body>
 <div id="header">
     <div id="Headder" class="header" onclick="location.href='../index.html'"><h3>Trenin Tracer</h3></div>
-    <div id="oversikt" class="header"><h3>Oversikt</h3></div>
+    <div id="oversikt" class="header" onclick="location.href='oversikt.html'"><h3>Oversikt</h3></div>
     <div id="sammenlign" class="header" onclick="location.href='compare.html'"><h3>Sammenlign</h3></div>
-    <div id="LeggTil" class="header" onclick="location.href='newTrainingTask.html'">><h3>Ny Type Øvelse?</h3></div>
+    <div id="LeggTil" class="header" onclick="location.href='newTrainingTask.html'"><h3>Ny Type Øvelse?</h3></div>
 </div>
 <div id="main">
-    <div class="form-text">
-        <label for="inpNyOvelse">Hva er navnet på den nye øvelsen?</label>
-        <input type="text" class="form-control"  id="inpNyOvelse">
-        <button onclick="leggTilNyOvelse()">New exercise</button>
-        <small id="inpNyOvelseFeil" class="form-text text-muted"></small>
+    <div id="newTrainingTask">
+        <div class="form-text">
+            <label for="inpNyOvelse">Hva er navnet på den nye øvelsen?</label>
+            <input type="text" class="form-control"  id="inpNyOvelse">
+            <button onclick="leggTilNyOvelse()">New exercise</button>
+            <small id="inpNyOvelseFeil" class="form-text text-muted"></small>
+        </div>
     </div>
 </div>
 

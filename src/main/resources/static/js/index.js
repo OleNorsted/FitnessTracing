@@ -156,42 +156,13 @@ function validerEnSession(){
     return feil;
 }
 
-
-function visNewTrainTask(){
-    document.getElementById("newTrainingTask").style.visibility = "visible";
-    document.getElementById("main").style.display = "none";
-}
-
 function visMain(){
     document.getElementById("newTrainingTask").style.visibility = "hidden";
     document.getElementById("main").style.display = "block";
 }
 
 
-function leggTilNyOvelse() {
-    let inp = $("#inpNyOvelse");
-    $("#inpNyOvelseFeil").html("")
-    let inpText = $("#inpNyOvelse").val();
-    if (inpText != null) {
-        let values = document.querySelector('#slcTypeOvelse').options;
-        let alike = false;
-        for (let i = 0; i < values.length; i++) {
-            if (values[i].value === inpText) {
-                alike = true;
-            }
-        }
-        if (!alike) {
-            const newTypeOfExercise = {type: inpText}
-            $.post("/saveNewTypeOfExercise", newTypeOfExercise, function () {
-                showTypesOfExercises();
-                $("#inpNyOvelseFeil").html("Ny øvelse lagret");
-            });
-            /*let newOption = new Option(inpText,inpText);
-            document.getElementById("slcTypeOvelse").add(newOption,undefined)
-            $("#inpNyOvelseFeil").html("Ny øvelse lagret");*/
-        }
-    }
-}
+
 
 function showTypesOfExercises(){
     $.get("/getTypeOfExercise", function (typesOfExercises){

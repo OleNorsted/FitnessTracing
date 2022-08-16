@@ -16,3 +16,14 @@ function formatDeta ( exercise,session, output){
     ut += "</table>"
     output.html(ut);
 }
+
+function visNewTrainTask(){
+    document.getElementById("newTrainingTask").style.visibility = "visible";
+    document.getElementById("main").style.display = "none";
+}
+
+function moveToIndexNewExercise (){
+    location.href='../index.html';
+    visNewTrainTask()
+}
+
