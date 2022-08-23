@@ -1,0 +1,345 @@
+.header{
+    margin-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.header ul {
+    margin: 0 0 0 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+.header li a {
+    display: block;
+    padding: 5px 0 5px 0;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 400;
+    position: relative;
+}
+
+.header li a:hover {
+    color: darkorange;
+    transition: 0.1s all ease-out;
+}
+
+.header li a:hover::before {
+    width: 100%;
+}
+
+.current  {
+    font-weight: 800 !important;
+}
+
+.current::before {
+    width: 100%;
+}
+
+
+.logoboks {
+    display: flex;
+    float: left;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    font-size: 2em;
+    padding: 10px 9px 10px 20px;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 95px;
+}
+
+.logonavn {
+    font-size: 1.8rem;
+}
+
+
+
+/* Navbar inspired by this solution: https://medium.com/creative-technology-concepts-code/responsive-mobile-dropdown-navigation-using-css-only-7218e4498a99 */
+
+.menu {
+    justify-content: space-around;
+    clear: both;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.hamburgertekst{
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.2rem;
+    position: relative;
+    top: 12px;
+    left: -58px;
+}
+
+
+.hamburgerknapp {
+    height: 75px;
+    cursor: pointer;
+    display: block;
+    float: right;
+    padding: 12px 0 24px 60px;
+    margin: 0 0 0 0;
+    position: relative;
+    user-select: none;
+    align-items: center;
+    line-height: 1.2;
+
+}
+
+.hamburgerknapp .ikon {
+    background: #333;
+    display: block;
+    position: relative;
+    transition: background 0.2s ease-out;
+    width: 25px;
+    height: 2px;
+}
+
+.hamburgerknapp .ikon:before,
+.hamburgerknapp .ikon:after {
+    background: #333;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+    width: 100%;
+}
+
+.hamburgerknapp .ikon:before {
+    top: 8px;
+}
+
+.hamburgerknapp .ikon:after {
+    top: -8px;
+}
+
+.sjekkboks {
+    display: none;
+    width: 10px;
+    height: 10px;
+}
+
+.sjekkboks:checked ~ .menu {
+    max-height: 260px;
+}
+
+.sjekkboks:checked ~ .hamburgerknapp .ikon {
+    background: transparent;
+}
+
+.sjekkboks:checked ~ .hamburgerknapp .ikon:before {
+    transform: rotate(-45deg);
+}
+
+.sjekkboks:checked ~ .hamburgerknapp .ikon:after {
+    transform: rotate(45deg);
+}
+
+.sjekkboks:checked ~ .hamburgerknapp:not(.steps) .ikon:before,
+.sjekkboks:checked ~ .hamburgerknapp:not(.steps) .ikon:after {
+    top: 0;
+}
+
+.logonavn a {
+    text-decoration: none;
+    color: #212529;
+}
+
+.logonavn a:hover{
+    text-decoration: none;
+    color: darkorange;
+}
+
+
+
+@media only screen and (min-width: 1000px) {
+    .header {
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+        width: 100%;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu {
+        display: flex;
+        width: 55%;
+        height: 75px;
+        justify-content: space-evenly;
+        border-radius: 15px;
+        align-items: center;
+    }
+
+    label.hamburgerknapp {
+        display: none;
+    }
+
+    .header li {
+        float: left;
+    }
+
+    .nav-link {
+        color: black;
+        font-size: 18px;
+
+        position: relative;
+    }
+
+    .nav-link:hover {
+        color: darkorange;
+        transition: 0.1s all ease-out;
+    }
+
+    .nav-link::before,
+    .current::before {
+        content: "";
+        display: block;
+        height: 5px;
+        width: 0;
+        top: 0;
+        background-color: #9bc277;
+        position: absolute;
+        transition: all ease-in-out 250ms;
+    }
+
+    .current::before {
+        width: 100%;
+    }
+
+    .nav-link:hover::before {
+        width: 100%;
+    }
+
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+
+    .hamburgerknapp .ikon {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 999px) {
+
+    .header{
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    .header ul {
+        margin: 0;
+    }
+
+    .header ul.menu {
+        background: whitesmoke;
+    }
+
+    .logoboks{
+        margin-top: 20px;
+        margin-bottom: auto;
+    }
+
+    .menu li {
+        padding: 1px;
+        margin-right: 0;
+        min-width: 100%;
+        text-align: left;
+        letter-spacing: 1px;
+        border-bottom: 2px solid hsla(0, 15%, 5%, 0.151);
+    }
+
+
+
+    .menu li.topNav a {
+        padding: 22px 0 15px 0;
+    }
+
+    .menu li.bottomNav a {
+        padding: 15px 0 15px 0;
+    }
+
+    .menu li a {
+        box-sizing: border-box;
+        padding: 15px 0 15px 0;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem 0 2rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .logo-img {
+        height: 80px;
+    }
+    .logonavn {
+        font-size: 1.3rem;
+    }
+
+    .hamburgerknapp .ikon {
+        width: 25px;
+        height: 2px;
+    }
+
+    .hamburgerknapp .ikon:before {
+        top: 7px;
+    }
+
+    .hamburgerknapp .ikon:after {
+        top: -7px;
+    }
+
+    .logo {
+        padding: 10px 9px 10px 10px;
+    }
+}
+
+@media only screen and (max-width: 370px){
+    .logo-img {
+        height: 60px;
+    }
+
+    .logonavn {
+        font-size: 1.2rem;
+    }
+
+    .logoboks{
+        margin-left: 5px;;
+    }
+
+    .hamburgerknapp .ikon {
+        width: 21px;
+        height: 1px;
+    }
+
+    .hamburgertekst {
+        font-size: 1rem;
+
+        position: relative;
+        top: 9px;
+        left: -50px;
+    }
+
+}
+
+.header ul {
+    padding: 0 2rem 0 2rem;
+}

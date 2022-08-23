@@ -1,28 +1,35 @@
 function comapareFillInpust(){
-    if ($("slcTypeCompare").val() != 0){
-        $("#slcTypeCompareInput1").html("")
-        $("#slcTypeCompareInput2").html("")
-        if ($("#slcTypeCompare").val() == "exercises") {
+    if ($("slcTypeCompare").val() !== 0){
+        let comp = $("#slcTypeCompare")
+        let comp1 = $("#slcTypeCompareInput1")
+        let comp2 = $("#slcTypeCompareInput2")
+        comp1.html("")
+        comp2.html("")
+        if (comp.val() === "exercises") {
             $.get("/getSession", function (session){
                 let options = "";
                 for (let s of session) {
                     options += "<option value= " + s.sId + ">" + s.sesName + " " + s.date + "</option>";
                 }
-                $("#slcTypeCompareInput1").html(options)
-                $("#slcTypeCompareInput2").html(options)
+                comp1.html(options)
+                comp2.html(options)
             });
+            document.getElementById("lblSlcTypeCompareInput1").style.visibility = "visible";
             document.getElementById("slcTypeCompareInput1").style.visibility = "visible";
+            document.getElementById("lblSlcTypeCompareInput2").style.visibility = "visible";
             document.getElementById("slcTypeCompareInput2").style.visibility = "visible";
 
         }
-        else if ($("#slcTypeCompare").val() == "exercise"){
+        else if (comp.val() === "exercise"){
             $.get("/getTypeOfExercise", function (typesOfExercises) {
                 for (let toe of typesOfExercises) {
                     let newOption = new Option(toe.type, toe.type);
                     document.getElementById("slcTypeCompareInput1").add(newOption, undefined);
                 }
             });
+            document.getElementById("lblSlcTypeCompareInput1").style.visibility = "visible";
             document.getElementById("slcTypeCompareInput1").style.visibility = "visible";
+            document.getElementById("lblSlcTypeCompareInput2").style.visibility = "hidden";
             document.getElementById("slcTypeCompareInput2").style.visibility = "hidden";
 
         }
@@ -33,37 +40,52 @@ function comapareFillInpust(){
 }
 
 function compare(){
-    if ($("#slcTypeCompareInput1").val() != $("#slcTypeCompareInput2")){
-        if ($("#slcTypeCompare").val() == "exercises"){
+    let comp = $("#slcTypeCompare")
+    let comp1 = $("#slcTypeCompareInput1")
+    let comp2 = $("#slcTypeCompareInput2")
+    let outFeil = $("#compareFeil")
+    outFeil.html("")
+    if (comp1.val() !== comp2.val()) {
+        if (comp.val() === "exercises") {
             let output = $("#divCompareOutput")
-            let value1 = $("#slcTypeCompareInput1").val();
-            let value2 = $("#slcTypeCompareInput2").val();
-            const sqlS = `SELECT * FROM session WHERE sId IN (${value1}, ${value2})`
-            const sqlE = `SELECT * FROM exercise WHERE sId IN (${value1}, ${value2})`
-            $.get("/getSessionQuery", {sqlS}, function (session){
-                $.get("/getExerciseQuery", {sqlE}, function (exercise){
-                    formatDeta(exercise,session,output)
+            let value1 = comp1.val();
+            let value2 = comp2.val();
+            const sqlS = `SELECT *
+                          FROM session
+                          WHERE sId IN (${value1}, ${value2})`
+            const sqlE = `SELECT *
+                          FROM exercise
+                          WHERE sId IN (${value1}, ${value2})`
+            $.get("/getSessionQuery", {sqlS}, function (session) {
+                $.get("/getExerciseQuery", {sqlE}, function (exercise) {
+                    formatDeta(exercise, session, output)
                 });
             });
-        }
-        else if ($("#slcTypeCompare").val() == "exercise"){
+        } else if (comp.val() === "exercise") {
             let output = $("#divCompareOutput")
-            let value1 = $("#slcTypeCompareInput1").val();
-            const sqlE = `SELECT * FROM exercise WHERE typeOvelse = ('${value1}')`
-            $.get("/getExerciseQuery", {sqlE} , function (exercise){
+            let value1 = comp1.val();
+            const sqlE = `SELECT *
+                          FROM exercise
+                          WHERE typeOvelse = ('${value1}')`
+            $.get("/getExerciseQuery", {sqlE}, function (exercise) {
                 let sessionIds = []
-                for (let e of exercise){
+                for (let e of exercise) {
                     let id = e.sId
-                    if (!sessionIds.includes(id)){
+                    if (!sessionIds.includes(id)) {
                         sessionIds.push(id)
                     }
                 }
-                const sqlS = `SELECT * FROM session WHERE sId IN (${sessionIds})`
-                $.get("/getSessionQuery", {sqlS}, function (session){
-                    formatDeta(exercise,session,output);
+                const sqlS = `SELECT *
+                              FROM session
+                              WHERE sId IN (${sessionIds})`
+                $.get("/getSessionQuery", {sqlS}, function (session) {
+                    formatDeta(exercise, session, output);
                 })
             })
         }
+    }
+    else{
+        outFeil.html("Kan ikke sammenligne en session med seg selv")
     }
 }
 
@@ -87,7 +109,9 @@ function compare(){
 
 function initiate(){
     document.getElementById("slcTypeCompareInput1").style.visibility = "hidden";
+    document.getElementById("lblSlcTypeCompareInput1").style.visibility = "hidden";
     document.getElementById("slcTypeCompareInput2").style.visibility = "hidden";
+    document.getElementById("lblSlcTypeCompareInput2").style.visibility = "hidden";
 }
 
 $(function (){

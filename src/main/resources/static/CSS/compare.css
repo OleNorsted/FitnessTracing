@@ -1,0 +1,25 @@
+#divCompBtn {
+    display: flex;
+    text-align: center;
+}
+
+#divCompBtn p {
+    margin: 0 0 0 10px;
+    padding-top: 3px;
+
+}
+
+.compSlc{
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .compInp{
+        font-size: 0.8rem;
+    }
+
+    .compInp select{
+
+    }
+
+}

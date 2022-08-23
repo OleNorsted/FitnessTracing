@@ -1,16 +1,24 @@
-function formatDeta ( exercise,session, output){
+function formatDeta ( exercise, session, output, antall){
     output.html("");
+    let lengde;
+    if (typeof antall !== 'undefined' && antall < session.length){
+        lengde = antall
+    }
+    else {
+        lengde = session.length
+    }
     let ut = "";
-    for (let i = session.length-1; i>=0; i--) {
+    for (let i = lengde-1; i>=0; i--) {
         let s = session[i]
-        ut += "<tr><th>" + s.sesName + "</th><th>"+s.date+"</th><td>"+s.oppvarming+"</td></tr>"
+        ut += "<tr class='headerRow'><th class='thR'>" + s.sesName + " </th><th class='thR'>"+s.date+"</th><td class='tdR'>"+s.oppvarming+"</td></tr>"
         for (let e of exercise) {
             if (s.sId === e.sId){
-                ut += "<tr><td>"+e.antallRep+" x "+e.antallSet+" med "+e.typeOvelse+"</td>";
+                ut += "<tr class='indentRow'><td>"+e.antallRep+" x "+e.antallSet+" med "+e.typeOvelse+"</td>";
                 for (let i = 1;i < e.antallSet+1;i++){
                     let tyngde = "tyngdeS"+i
-                    ut += "<td> Sett "+i+": "+e[tyngde]+" Kg </td>";
-                }}
+                    ut += "<td> Sett "+i+": "+e[tyngde]+"Kg </td>";
+                }
+            }
         }
     }
     ut += "</table>"

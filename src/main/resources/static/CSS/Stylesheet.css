@@ -1,0 +1,73 @@
+.inputs.form-control {
+    width: 500px;
+}
+
+.indentRow{
+    padding-left: 20px;
+    display: flex;
+}
+
+.thR{
+    padding-right: 10px;
+}
+@media only screen and (max-width: 600px) {
+    h4{
+        font-size: 1.2rem;
+    }
+
+    .headerRow{
+        font-size: 0.7rem;
+    }
+
+    .indentRow{
+        font-size: 0.7rem;
+    }
+
+    .inputs.form-control {
+        width: 300px;
+    }
+
+
+}
+
+@media only screen and (max-width: 350px){
+    h4{
+        font-size: 1rem;
+    }
+
+    .headerRow{
+        font-size: 0.5rem;
+    }
+
+    .indentRow{
+        font-size: 0.5rem;
+    }
+
+    .inputs.form-control {
+        width: 200px;
+    }
+}
+* {
+    box-sizing: border-box;
+
+    font-family: "Poppins", sans-serif;
+}
+
+.tyngde {
+    display: none;
+}
+
+li{
+    list-style: none;
+}
+
+td {
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+
+
+

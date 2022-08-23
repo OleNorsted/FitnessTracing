@@ -104,31 +104,40 @@ function showAllExercise(){
     let output = $("#Result")
    $.get( "/getExercise", function( exercise ) {
         $.get("/getSession", function (session){
-            formatDeta( exercise , session, output);
+            formatDeta( exercise , session, output,4);
         })
    });
 }
 
 
 function validerEnTrening(){
-    $("#slcSessionFeil").html("");
-    $("#slcTypeOvelseFeil").html("");
-    $("#antallSetFeil").html("");
-    $("#antallRepFeil").html("");
+    let ses = $("#slcSession");
+    let sesFeil = $("#slcSessionFeil");
+    let typeOvelse = $("#slcTypeOvelse");
+    let typeOvelseFeil = $("#slcTypeOvelseFeil");
+    let antSet = $("#antallSet")
+    let antSetFeil = $("#antallSetFeil");
+    let antRep = $("#antallRep");
+    let antRepFeil = $("#antallRepFeil");
+
+    sesFeil.html("");
+    typeOvelseFeil.html("");
+    antSetFeil.html("");
+    antRepFeil.html("");
     let feil = false;
-    if ($("#slcSession").val()==0){
-        $("#slcSessionFeil").html("Må velde en session å linke trening til");
+    if (ses.val()===0){
+        sesFeil.html("Må velde en session å linke trening til");
     }
-    if($("#slcTypeOvelse").val()== "Type Of Exercise"){
-        $("#slcTypeOvelseFeil").html("Må velge noe inn i type ovelse");
+    if(typeOvelse.val() === "Type Of Exercise"){
+        typeOvelseFeil.html("Må velge noe inn i type ovelse");
         feil=true;
     }
-    if($("#antallSet").val()== 0){
-        $("#antallSetFeil").html("Må velge noe inn i antall Set");
+    if(antSet.val()=== 0){
+        antSetFeil.html("Må velge noe inn i antall Set");
         feil=true;
     }
-    if($("#antallRep").val()== 0){
-        $("#antallRepFeil").html("Må velge noe inn i antall rep");
+    if(antRep.val()=== 0){
+        antRepFeil.html("Må velge noe inn i antall rep");
         feil=true;
     }
     return feil;
@@ -136,32 +145,32 @@ function validerEnTrening(){
 
 
 function validerEnSession(){
-    $("#inpSesNameFeil").html("");
-    $("#inpDateFeil").html("");
-    $("#inpOppvarmingFeil").html("");
+    let sesName = $("#inpSesName");
+    let sesNameFeil = $("#inpSesNameFeil");
+    let date = $("#inpDate");
+    let dateFeil = $("#inpDateFeil");
+    let oppvarming = $("#inpOppvarming");
+    let oppvarmingFeil = $("#inpOppvarmingFeil");
+
+    sesNameFeil.html("");
+    dateFeil.html("");
+    oppvarmingFeil.html("");
 
     let feil = false;
-    if ($("#inpSesName").val() == ""){
-        $("#inpSesNameFeil").html("Du må velge et navn på treningsøkten");
+    if (sesName.val() === ""){
+        sesNameFeil.html("Du må velge et navn på treningsøkten");
         feil = true;
     }
-    if ($("#inpDate").val()==0){
-        $("#inpDateFeil").html("må velge en dato");
+    if (date.val()===0){
+        dateFeil.html("må velge en dato");
         feil = true;
     }
-    if ($("#inpOppvarming").val() == ""){
-        $("#inpOppvarmingFeil").html("må velge en oppvarming");
+    if (oppvarming.val() === ""){
+        oppvarmingFeil.html("må velge en oppvarming");
         feil = true;
     }
     return feil;
 }
-
-function visMain(){
-    document.getElementById("newTrainingTask").style.visibility = "hidden";
-    document.getElementById("main").style.display = "block";
-}
-
-
 
 
 function showTypesOfExercises(){
@@ -214,7 +223,6 @@ function setDate(){
 
 
 $(function (){
-    visMain();
     visSessions();
     showAllExercise();
     loadValuesSet();
