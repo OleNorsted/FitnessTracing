@@ -1,3 +1,5 @@
+
+
 function loadValuesSet(){
     let select = '';
     for (let i=0;i<=5;i++) {
@@ -99,52 +101,43 @@ function regSession(){
 
 
 function showAllExercise(){
+    let output = $("#Result")
    $.get( "/getExercise", function( exercise ) {
         $.get("/getSession", function (session){
-            formatDeta( exercise , session);
+            formatDeta( exercise , session, output,4);
         })
    });
 }
 
 
-function formatDeta ( exercise,session){
-    $("#Result").html("");
-    let ut = "";
-    for (let s of session) {
-        ut += "<tr><th>" + s.sesName + "</th><th>"+s.date+"</th><td>"+s.oppvarming+"</td></tr>"
-        for (let e of exercise) {
-            if (s.sId === e.sId){
-                ut += "<tr><td>"+e.antallRep+" x "+e.antallSet+" med "+e.typeOvelse+"</td>";
-                for (let i = 1;i < e.antallSet+1;i++){
-                    let tyngde = "tyngdeS"+i
-                    ut += "<td> Sett "+i+": "+e[tyngde]+" Kg </td>";
-                }}
-        }
-    }
-    ut += "</table>"
-    $("#Result").html(ut);
-}
-
-
 function validerEnTrening(){
-    $("#slcSessionFeil").html("");
-    $("#slcTypeOvelseFeil").html("");
-    $("#antallSetFeil").html("");
-    $("#antallRepFeil").html("");
+    let ses = $("#slcSession");
+    let sesFeil = $("#slcSessionFeil");
+    let typeOvelse = $("#slcTypeOvelse");
+    let typeOvelseFeil = $("#slcTypeOvelseFeil");
+    let antSet = $("#antallSet")
+    let antSetFeil = $("#antallSetFeil");
+    let antRep = $("#antallRep");
+    let antRepFeil = $("#antallRepFeil");
+
+    sesFeil.html("");
+    typeOvelseFeil.html("");
+    antSetFeil.html("");
+    antRepFeil.html("");
     let feil = false;
-    if ($("#slcSession").val()==0){
-        $("#slcSessionFeil").html("Må velde en session å linke trening til");
+    if (ses.val()===0){
+        sesFeil.html("Må velde en session å linke trening til");
     }
-    if($("#slcTypeOvelse").val()== "Type Of Exercise"){
-        $("#slcTypeOvelseFeil").html("Må velge noe inn i type ovelse");
+    if(typeOvelse.val() === "Type Of Exercise"){
+        typeOvelseFeil.html("Må velge noe inn i type ovelse");
         feil=true;
     }
-    if($("#antallSet").val()== 0){
-        $("#antallSetFeil").html("Må velge noe inn i antall Set");
+    if(antSet.val()=== 0){
+        antSetFeil.html("Må velge noe inn i antall Set");
         feil=true;
     }
-    if($("#antallRep").val()== 0){
-        $("#antallRepFeil").html("Må velge noe inn i antall rep");
+    if(antRep.val()=== 0){
+        antRepFeil.html("Må velge noe inn i antall rep");
         feil=true;
     }
     return feil;
@@ -152,67 +145,37 @@ function validerEnTrening(){
 
 
 function validerEnSession(){
-    $("#inpSesNameFeil").html("");
-    $("#inpDateFeil").html("");
-    $("#inpOppvarmingFeil").html("");
+    let sesName = $("#inpSesName");
+    let sesNameFeil = $("#inpSesNameFeil");
+    let date = $("#inpDate");
+    let dateFeil = $("#inpDateFeil");
+    let oppvarming = $("#inpOppvarming");
+    let oppvarmingFeil = $("#inpOppvarmingFeil");
+
+    sesNameFeil.html("");
+    dateFeil.html("");
+    oppvarmingFeil.html("");
 
     let feil = false;
-    if ($("#inpSesName").val() == ""){
-        $("#inpSesNameFeil").html("Du må velge et navn på treningsøkten");
+    if (sesName.val() === ""){
+        sesNameFeil.html("Du må velge et navn på treningsøkten");
         feil = true;
     }
-    if ($("#inpDate").val()==0){
-        $("#inpDateFeil").html("må velge en dato");
+    if (date.val()===0){
+        dateFeil.html("må velge en dato");
         feil = true;
     }
-    if ($("#inpOppvarming").val() == ""){
-        $("#inpOppvarmingFeil").html("må velge en oppvarming");
+    if (oppvarming.val() === ""){
+        oppvarmingFeil.html("må velge en oppvarming");
         feil = true;
     }
     return feil;
 }
 
 
-function visNewTrainTask(){
-    document.getElementById("newTrainingTask").style.visibility = "visible";
-    document.getElementById("main").style.display = "none";
-}
-
-function visMain(){
-    document.getElementById("newTrainingTask").style.visibility = "hidden";
-    document.getElementById("main").style.display = "block";
-}
-
-
-function leggTilNyOvelse() {
-    let inp = $("#inpNyOvelse");
-    $("#inpNyOvelseFeil").html("")
-    let inpText = $("#inpNyOvelse").val();
-    if (inpText != null) {
-        let values = document.querySelector('#slcTypeOvelse').options;
-        let alike = false;
-        for (let i = 0; i < values.length; i++) {
-            if (values[i].value === inpText) {
-                alike = true;
-            }
-        }
-        if (!alike) {
-            const newTypeOfExercise = {type: inpText}
-            $.post("/saveNewTypeOfExercise", newTypeOfExercise, function () {
-                showTypesOfExercises();
-                $("#inpNyOvelseFeil").html("Ny øvelse lagret");
-            });
-            /*let newOption = new Option(inpText,inpText);
-            document.getElementById("slcTypeOvelse").add(newOption,undefined)
-            $("#inpNyOvelseFeil").html("Ny øvelse lagret");*/
-        }
-    }
-}
-
 function showTypesOfExercises(){
     $.get("/getTypeOfExercise", function (typesOfExercises){
         $("#slcTypeOvelse").html("")
-        let values = document.querySelector('#slcTypeOvelse').options;
         for (let toe of typesOfExercises){
             let newOption = new Option(toe.type,toe.type);
             document.getElementById("slcTypeOvelse").add(newOption,undefined)
@@ -231,9 +194,35 @@ function setDate(){
     $("#inpDate").val(today)
 }
 
+/*function comapreFillInpust(){
+    if ($("slcTypeCompare").val() != 0){
+        if ($("slcTypeCompare").val() == "exercises") {
+            let options = "";
+            for (let s of session) {
+                options += "<option value= " + s.sId + ">" + s.sesName + " " + s.date + "</option>";
+            }
+            $("#slcTypeCompareInput1").html(options)
+            $("#slcTypeCompareInput2").html(options)
+        }
+        else if ($("slcTypeCompare").val() == "exercise"){
+            $.get("/getTypeOfExercise", function (typesOfExercises) {
+                $("#slcTypeCompareInput1").html("")
+                $("#slcTypeCompareInput2").html("")
+                let values1 = document.querySelector('#slcTypeCompareInput1').options;
+                let values2 = document.querySelector('#slcTypeCompareInput2').options;
+                for (let toe of typesOfExercises) {
+                    let newOption = new Option(toe.type, toe.type);
+                    document.getElementById("slcTypeCompareInput1").add(newOption, undefined)
+                    document.getElementById("slcTypeCompareInput2").add(newOption, undefined)
+                }
+            });
+        }
+    }
+}*/
+
+
 
 $(function (){
-    visMain();
     visSessions();
     showAllExercise();
     loadValuesSet();
